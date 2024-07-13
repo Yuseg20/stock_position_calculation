@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="position" placeholder="点位" />
+    <input type="text" id="result" placeholder="推荐仓位" disabled />
+    <!-- <button id="calculation">计算</button> -->
+</body>
+
+<style>
+    body {
+        margin: 0;
+        padding: 10px;
+    }
+
+    input {
+        width: 100%;
+        height: 35px;
+        margin-bottom: 12px;
+    }
+
+    button {
+        width: 100%;
+        height: 35px;
+    }
+</style>
+
+<script>
+    let positionEl = document.getElementById('position');
+    let resultEl = document.getElementById('result');
+    let min = 2500;
+    let max = 3000;
+    let diff = max - min;
+    let percentLimit = 90;
+    let unitPercnet = percentLimit / diff;
+
+    // document.getElementById('calculation').onclick = function () {
+    //     resultEl.value = (parseInt((percentLimit - (parseFloat(positionEl.value) - min) * unitPercnet) * 100) / 100) + '%';
+    // }
+
+    positionEl.oninput = function () {
+        let result = 0;
+        let positionValue = parseFloat(positionEl.value);
+        if (positionValue >= min && positionValue <= max) {
+            result = parseInt((percentLimit - (positionValue - min) * unitPercnet) * 100) / 100;
+        }
+        resultEl.value = result + '%';
+    }
+</script>
+</html>
