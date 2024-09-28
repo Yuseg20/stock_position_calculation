@@ -33,7 +33,7 @@
     let positionEl = document.getElementById('position');
     let resultEl = document.getElementById('result');
     let min = 2500;
-    let max = 3000;
+    let max = 3200;
     let diff = max - min;
     let percentLimit = 90;
     let unitPercnet = percentLimit / diff;
@@ -50,5 +50,14 @@
         }
         resultEl.value = result + '%';
     }
+
+    function jQuery351031245764290856437_1727489987293(response) {
+        positionEl.value = response.data.preKPrice;
+        positionEl.dispatchEvent(new Event('input'));
+    }
+
+    let scriptEl = document.createElement('script');
+    scriptEl.src = 'https://push2his.eastmoney.com/api/qt/stock/kline/get?cb=jQuery351031245764290856437_1727489987293&secid=1.000001&ut=fa5fd1943c7b386f172d6893dbfba10b&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=102&fqt=1&end=20500101&lmt=120&_=1727489987359';
+    document.querySelector('body').appendChild(scriptEl);
 </script>
 </html>
