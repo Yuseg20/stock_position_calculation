@@ -75,9 +75,9 @@
         }
     }
 
-    window.addEventListener('beforeunload', function(e) {
-        var confirmationMessage = '您确定要离开吗?';
-        e.returnValue = confirmationMessage; // 兼容不同浏览器的提示方式
-    });
+   document.addEventListener('touchmove', function(event) {
+        alert('滑动');
+        event.preventDefault(); // 阻止默认的左滑返回行为
+    }, false);
 </script>
 </html>
