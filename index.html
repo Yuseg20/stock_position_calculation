@@ -76,8 +76,13 @@
     }
 
    document.addEventListener('touchmove', function(event) {
-        alert('滑动');
+        alert('touchmove');
         event.preventDefault(); // 阻止默认的左滑返回行为
     }, false);
+
+    window.addEventListener('popstate', function(event) {
+        alert('popstate');
+        event.preventDefault(); // 阻止默认的左滑返回行为
+    });
 </script>
 </html>
