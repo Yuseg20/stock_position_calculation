@@ -75,18 +75,9 @@
         }
     }
 
-    // 监听触摸开始
-    document.addEventListener('touchstart', function(event) {
-        startX = event.touches[0].pageX;
-    });
-     
-    // 监听触摸结束
-    document.addEventListener('touchend', function(event) {
-        endX = event.changedTouches[0].pageX;
-        // 如果滑动超过了30像素，并且方向从右到左，则阻止默认行为
-        // if (startX - endX > 30) {
-            event.preventDefault();
-        // }
+    window.addEventListener('beforeunload', function(e) {
+        var confirmationMessage = '您确定要离开吗?';
+        e.returnValue = confirmationMessage; // 兼容不同浏览器的提示方式
     });
 </script>
 </html>
