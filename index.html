@@ -84,9 +84,9 @@
     document.addEventListener('touchend', function(event) {
         endX = event.changedTouches[0].pageX;
         // 如果滑动超过了30像素，并且方向从右到左，则阻止默认行为
-        if (startX - endX > 30) {
+        // if (startX - endX > 30) {
             event.preventDefault();
-        }
+        // }
     });
 </script>
 </html>
