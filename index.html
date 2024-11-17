@@ -9,6 +9,7 @@
     <input type="number" id="position" placeholder="点位" />
     <input type="text" id="result" placeholder="推荐仓位" disabled />
     <!-- <button id="calculation">计算</button> -->
+    <button onclick="handleFullScreen">全屏</button>
 </body>
 
 <style>
@@ -63,5 +64,14 @@
     // scriptEl.src = 'https://push2his.eastmoney.com/api/qt/stock/kline/get?cb=jQuery351031245764290856437_1727489987293&secid=1.000001&ut=fa5fd1943c7b386f172d6893dbfba10b&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=102&fqt=1&end=20500101&lmt=120&_=1727489987359';
     scriptEl.src = 'https://push2.eastmoney.com/api/qt/stock/get?invt=2&fltt=1&cb=jQuery351017414600171881234_1727703068199&fields=f58%2Cf107%2Cf57%2Cf43%2Cf59%2Cf169%2Cf170%2Cf152%2Cf46%2Cf60%2Cf44%2Cf45%2Cf47%2Cf48%2Cf19%2Cf532%2Cf39%2Cf161%2Cf49%2Cf171%2Cf50%2Cf86%2Cf600%2Cf601%2Cf154%2Cf84%2Cf85%2Cf168%2Cf108%2Cf116%2Cf167%2Cf164%2Cf92%2Cf71%2Cf117%2Cf292%2Cf113%2Cf114%2Cf115%2Cf119%2Cf120%2Cf121%2Cf122%2Cf296&secid=1.000001&ut=fa5fd1943c7b386f172d6893dbfba10b&wbp2u=%7C0%7C0%7C0%7Cweb&dect=1&_=1727703068200';
     document.querySelector('body').appendChild(scriptEl);
+
+    // 全屏
+    function handleFullScreen() {
+        if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+    } else {
+        document.exitFullscreen();
+    }
+    }
 </script>
 </html>
