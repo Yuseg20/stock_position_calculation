@@ -9,7 +9,7 @@
     <input type="number" id="position" placeholder="点位" />
     <input type="text" id="result" placeholder="推荐仓位" disabled />
     <!-- <button id="calculation">计算</button> -->
-    <button onclick="handleFullScreen">全屏</button>
+    <button id="btn-full-screen">全屏</button>
 </body>
 
 <style>
@@ -66,12 +66,13 @@
     document.querySelector('body').appendChild(scriptEl);
 
     // 全屏
-    function handleFullScreen() {
+    document.getElementById('btn-full-screen').onclick = function () {
+        console.log(document.fullscreenElement);
         if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
-    } else {
-        document.exitFullscreen();
-    }
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
     }
 </script>
 </html>
