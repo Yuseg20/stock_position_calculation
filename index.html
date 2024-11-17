@@ -79,12 +79,9 @@
         alert('touchmove');
         event.preventDefault(); // 阻止默认的左滑返回行为
     }, false);
-
-   //拦截安卓回退按钮
-    history.pushState(null, null, location.href);
-    window.addEventListener('popstate', function(event) {
-        history.pushState(null, null, location.href );
-        //此处加入回退时你要执行的代码
+    
+    document.addEventListener('touchstart', function(e) {
+        e.preventDefault(); // 阻止默认行为，防止返回上一页
     });
 </script>
 </html>
