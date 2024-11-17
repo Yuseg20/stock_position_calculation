@@ -80,9 +80,11 @@
         event.preventDefault(); // 阻止默认的左滑返回行为
     }, false);
 
+   //拦截安卓回退按钮
+    history.pushState(null, null, location.href);
     window.addEventListener('popstate', function(event) {
-        alert('popstate');
-        event.preventDefault(); // 阻止默认的左滑返回行为
+        history.pushState(null, null, location.href );
+        //此处加入回退时你要执行的代码
     });
 </script>
 </html>
