@@ -103,14 +103,21 @@
         return recommendPercent;
     }
 
+    // 计算回撤率
+    function calcRetractPercent (retractStartPosition, currentPosition) {
+        let retractPercent = 0;
+        if (currentPosition < retractStartPosition) {
+            retractPercent = parseInt((currentPosition - retractStartPosition) * 10000 / retractStartPosition) / 100;
+        }
+
+        return retractPercent;
+    }
+
     document.getElementById('js-btn-calculation').onclick = function () {
-        let min = 15483.25;
-        let max = 22133.22;
         let retractStartPosition = parseFloat(document.getElementById('retract-start-position').value);
         let currentPosition = parseFloat(document.getElementById('current-position').value);
-        let retractPercent = parseInt((currentPosition - retractStartPosition) * 10000 / retractStartPosition) / 100;
-        document.getElementById('retract-percent').value = "回撤: " + retractPercent + "%";
-        document.getElementById('recommend-percent').value = "推荐仓位: " + calcRecommendPercent(min, max, currentPosition) + "%";
+        document.getElementById('retract-percent').value = "回撤: " + calcRetractPercent(retractStartPosition, currentPosition) + "%";
+        document.getElementById('recommend-percent').value = "推荐仓位: " + calcRecommendPercent(currentPosition, retractStartPosition, currentPosition) + "%";
     }
 </script>
 </html>
