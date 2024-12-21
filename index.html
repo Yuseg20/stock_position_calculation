@@ -9,7 +9,8 @@
     <input type="number" id="position" placeholder="点位" />
     <input type="text" id="result" placeholder="推荐仓位" disabled />
     <!-- <button id="calculation">计算</button> -->
-    <button id="btn-full-screen">全屏</button>
+    <!-- <button id="btn-full-screen">全屏</button> -->
+    <br/><br/><br/>
     <input type="number" id="retract-start-position" placeholder="回撤开始点位" />
     <input type="number" id="current-position" placeholder="目前点位" />
     <input type="text" id="retract-percent" placeholder="回撤百分比" disabled />
@@ -89,11 +90,27 @@
         e.preventDefault(); // 阻止默认行为，防止返回上一页
     });
 
+    // 计算推荐仓位
+    function calcRecommendPercent (min, max, current) {
+        let recommendPercent = 0;
+        if (current >= min && current <= max) {
+            let diff = max - min;
+            let percentLimit = 100;
+            let unitPercnet = percentLimit / diff;
+            recommendPercent = parseInt((percentLimit - (current - min) * unitPercnet) * 100) / 100;
+        }
+
+        return recommendPercent;
+    }
+
     document.getElementById('js-btn-calculation').onclick = function () {
+        let min = 15483.25;
+        let max = 22133.22;
         let retractStartPosition = parseFloat(document.getElementById('retract-start-position').value);
         let currentPosition = parseFloat(document.getElementById('current-position').value);
         let retractPercent = parseInt((currentPosition - retractStartPosition) * 10000 / retractStartPosition) / 100;
         document.getElementById('retract-percent').value = "回撤: " + retractPercent + "%";
+        document.getElementById('recommend-percent').value = "推荐仓位: " + calcRecommendPercent(min, max, currentPosition) + "%";
     }
 </script>
 </html>
