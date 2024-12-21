@@ -12,7 +12,8 @@
     <!-- <button id="btn-full-screen">全屏</button> -->
     <br/><br/><br/>
     <input type="number" id="retract-start-position" placeholder="回撤开始点位" value="22133.22" />
-    <input type="number" id="current-position" placeholder="目前点位" value="15483.25" />
+    <input type="number" id="retract-expect-position" placeholder="回撤预期点位" value="15483.25" />
+    <input type="number" id="current-position" placeholder="当前点位" />
     <input type="text" id="retract-percent" placeholder="回撤百分比" disabled />
     <input type="text" id="recommend-percent" placeholder="推荐仓位" disabled />
     <button id="js-btn-calculation">计算纳指推荐仓位</button>
@@ -113,22 +114,30 @@
         return retractPercent;
     }
 
+    // 展示推荐仓位信息
+    function showRecommendInfo () {
+        // 回撤开始点位
+        let retractStartPosition = parseFloat(document.getElementById('retract-start-position').value);
+        // 回撤预期点位
+        let retractExpectPosition = parseFloat(document.getElementById('retract-expect-position').value);
+        // 当前点位
+        let currentPosition = parseFloat(document.getElementById('current-position').value);
+        document.getElementById('retract-percent').value = "回撤: " + calcRetractPercent(retractStartPosition, currentPosition) + "%";
+        document.getElementById('recommend-percent').value = "推荐仓位: " + calcRecommendPercent(retractExpectPosition, retractStartPosition, currentPosition) + "%";
+    }
+
     // 获取纳斯达克当前点位
     function jQuery351017414600171881234_1727703068200(response) {
         let data = response.data ? response.data : {};
         let price = data.f43 ? (data.f43 / 100) : 0;
         document.getElementById('current-position').value = price;
         // document.getElementById('current-position').dispatchEvent(new Event('input'));
+        showRecommendInfo();
     }
     let scriptNDX100 = document.createElement('script');
     scriptNDX100.src = 'https://push2.eastmoney.com/api/qt/stock/get?invt=2&fltt=1&cb=jQuery351017414600171881234_1727703068200&fields=f58%2Cf107%2Cf57%2Cf43%2Cf59%2Cf169%2Cf170%2Cf152%2Cf46%2Cf60%2Cf44%2Cf45%2Cf47%2Cf48%2Cf19%2Cf532%2Cf39%2Cf161%2Cf49%2Cf171%2Cf50%2Cf86%2Cf600%2Cf601%2Cf154%2Cf84%2Cf85%2Cf168%2Cf108%2Cf116%2Cf167%2Cf164%2Cf92%2Cf71%2Cf117%2Cf292%2Cf113%2Cf114%2Cf115%2Cf119%2Cf120%2Cf121%2Cf122%2Cf296&secid=100.NDX100&ut=fa5fd1943c7b386f172d6893dbfba10b&wbp2u=%7C0%7C0%7C0%7Cweb&dect=1&_=1727703068200';
     document.querySelector('body').appendChild(scriptNDX100);
 
-    document.getElementById('js-btn-calculation').onclick = function () {
-        let retractStartPosition = parseFloat(document.getElementById('retract-start-position').value);
-        let currentPosition = parseFloat(document.getElementById('current-position').value);
-        document.getElementById('retract-percent').value = "回撤: " + calcRetractPercent(retractStartPosition, currentPosition) + "%";
-        document.getElementById('recommend-percent').value = "推荐仓位: " + calcRecommendPercent(currentPosition, retractStartPosition, currentPosition) + "%";
-    }
+    document.getElementById('js-btn-calculation').onclick = showRecommendInfo;
 </script>
 </html>
