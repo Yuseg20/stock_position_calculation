@@ -11,8 +11,8 @@
     <!-- <button id="calculation">计算</button> -->
     <!-- <button id="btn-full-screen">全屏</button> -->
     <br/><br/><br/>
-    <input type="number" id="retract-start-position" placeholder="回撤开始点位" value="22133.22" />
-    <input type="number" id="retract-expect-position" placeholder="回撤预期点位" value="15483.25" />
+    <input type="number" id="retract-start-position" placeholder="回撤开始点位" />
+    <input type="number" id="retract-expect-position" placeholder="回撤预期点位" />
     <input type="number" id="current-position" placeholder="当前点位" />
     <input type="text" id="retract-percent" placeholder="回撤百分比" disabled />
     <input type="text" id="recommend-percent" placeholder="推荐仓位" disabled />
@@ -91,6 +91,16 @@
         e.preventDefault(); // 阻止默认行为，防止返回上一页
     });
 
+    // 初始化开始和预期回撤点位
+    let retractStartPositionValue = localStorage.getItem('retract-start-position');
+    if (retractStartPositionValue) {
+        document.getElementById('retract-start-position').value = retractStartPositionValue;
+    }
+    let retractExpectPositionValue = localStorage.getItem('retract-expect-position');
+    if (retractExpectPositionValue) {
+        document.getElementById('retract-expect-position').value = retractExpectPositionValue;
+    }
+
     // 计算推荐仓位
     function calcRecommendPercent (min, max, current) {
         let recommendPercent = 0;
@@ -124,6 +134,10 @@
         let currentPosition = parseFloat(document.getElementById('current-position').value);
         document.getElementById('retract-percent').value = "回撤: " + calcRetractPercent(retractStartPosition, currentPosition) + "%";
         document.getElementById('recommend-percent').value = "推荐仓位: " + calcRecommendPercent(retractExpectPosition, retractStartPosition, currentPosition) + "%";
+
+        // 保存回撤点位信息
+        localStorage.setItem('retract-start-position', retractStartPosition);
+        localStorage.setItem('retract-expect-position', retractExpectPosition);
     }
 
     // 获取纳斯达克当前点位
