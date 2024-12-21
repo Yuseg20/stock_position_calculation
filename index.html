@@ -82,14 +82,14 @@
     //     }
     // }
 
-   document.addEventListener('touchmove', function(event) {
-        alert('touchmove');
-        event.preventDefault(); // 阻止默认的左滑返回行为
-    }, false);
+   // document.addEventListener('touchmove', function(event) {
+   //      alert('touchmove');
+   //      event.preventDefault(); // 阻止默认的左滑返回行为
+   //  }, false);
     
-    document.addEventListener('touchstart', function(e) {
-        e.preventDefault(); // 阻止默认行为，防止返回上一页
-    });
+   //  document.addEventListener('touchstart', function(e) {
+   //      e.preventDefault(); // 阻止默认行为，防止返回上一页
+   //  });
 
     // 初始化开始和预期回撤点位
     let retractStartPositionValue = localStorage.getItem('retract-start-position');
