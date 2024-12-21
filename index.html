@@ -10,6 +10,11 @@
     <input type="text" id="result" placeholder="推荐仓位" disabled />
     <!-- <button id="calculation">计算</button> -->
     <button id="btn-full-screen">全屏</button>
+    <input type="number" id="retract-start-position" placeholder="回撤开始点位" />
+    <input type="number" id="current-position" placeholder="目前点位" />
+    <input type="text" id="retract-percent" placeholder="回撤百分比" disabled />
+    <input type="text" id="recommend-percent" placeholder="推荐仓位" disabled />
+    <button id="js-btn-calculation">计算纳指推荐仓位</button>
 </body>
 
 <style>
@@ -83,5 +88,12 @@
     document.addEventListener('touchstart', function(e) {
         e.preventDefault(); // 阻止默认行为，防止返回上一页
     });
+
+    document.getElementById('js-btn-calculation').onclick = function () {
+        let retractStartPosition = parseFloat(document.getElementById('retract-start-position').value);
+        let currentPosition = parseFloat(document.getElementById('current-position').value);
+        let retractPercent = parseInt((currentPosition - retractStartPosition) * 10000 / retractStartPosition) / 100;
+        document.getElementById('retract-percent').value = "回撤: " + retractPercent + "%";
+    }
 </script>
 </html>
