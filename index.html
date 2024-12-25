@@ -155,8 +155,10 @@
                 highPosition = position;
             }
         });
-
         document.getElementById('retract-start-position').value = highPosition;
+
+        // 计算跌 30% 的点位
+        document.getElementById('retract-expect-position').value = highPosition - highPosition * 0.3;
 
         showRecommendInfo();
     }
