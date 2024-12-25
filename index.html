@@ -147,8 +147,8 @@
         klines.forEach(item => {
             let position = 0;
             let items = item.split(',');
-            if (items.length >= 4) {
-                position = parseFloat(items[3]);
+            if (items.length >= 3) {
+                position = parseFloat(items[2]);
             }
 
             if (position > highPosition) {
