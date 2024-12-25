@@ -142,7 +142,21 @@
 
     // 获取纳斯达克100历史高点
     function jQuery35107180487461279674_1735131910255(response) {
-        console.log(response);
+        let highPosition = 0;
+        let klines = response.data.klines;
+        klines.forEach(item => {
+            let position = 0;
+            let items = item.split(',');
+            if (items.length >= 4) {
+                position = parseFloat(items[3]);
+            }
+
+            if (position > highPosition) {
+                highPosition = position;
+            }
+        });
+
+        console.log(highPosition);
     }
     let scriptNDX100HistoryHigh = document.createElement('script');
     scriptNDX100HistoryHigh.src = 'https://push2his.eastmoney.com/api/qt/stock/kline/get?cb=jQuery35107180487461279674_1735131910255&secid=100.NDX100&ut=fa5fd1943c7b386f172d6893dbfba10b&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=1&end=20500101&lmt=1000000&_=1735131910279';
