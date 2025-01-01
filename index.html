@@ -179,17 +179,5 @@
     document.querySelector('body').appendChild(scriptNDX100);
 
     document.getElementById('js-btn-calculation').onclick = showRecommendInfo;
-
-    if ("geolocation" in navigator) {
-      // geolocation is available
-      navigator.geolocation.getCurrentPosition(function(position) {
-        alert("Latitude is :" + position.coords.latitude + ", Longitude is :" + position.coords.longitude);
-      }, function(error) {
-        alert("Error Code = " + error.code + " - " + error.message);
-      });
-    } else {
-      // geolocation is not supported
-      alert("Geolocation is not supported by this browser.");
-    }
 </script>
 </html>
