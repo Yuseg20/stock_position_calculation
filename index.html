@@ -17,6 +17,7 @@
     <input type="text" id="retract-percent" placeholder="回撤百分比" disabled />
     <input type="text" id="recommend-percent" placeholder="推荐仓位" disabled />
     <button id="js-btn-calculation">计算纳指推荐仓位</button>
+    <p id="geolocation"></p>
 </body>
 
 <style>
@@ -179,5 +180,17 @@
     document.querySelector('body').appendChild(scriptNDX100);
 
     document.getElementById('js-btn-calculation').onclick = showRecommendInfo;
+
+    if ("geolocation" in navigator) {
+        // geolocation is available
+        navigator.geolocation.getCurrentPosition(function(position) {
+            document.getElementById('geolocation').innerText = "Latitude is :" + position.coords.latitude + ", Longitude is :" + position.coords.longitude;
+        }, function(error) {
+            document.getElementById('geolocation').innerText = "Error Code = " + error.code + " - " + error.message;
+        });
+    } else {
+        // geolocation is not supported
+        document.getElementById('geolocation').innerText = "Geolocation is not supported by this browser.";
+    }
 </script>
 </html>
